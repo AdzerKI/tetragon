@@ -1800,6 +1800,8 @@ func createUprobeSensorFromEntry(polInfo *policyInfo, uprobeEntry *genericUprobe
 
 		retFilterMap := program.MapBuilderProgram("filter_map", loadret)
 		maps = append(maps, retFilterMap)
+		retState := getUprobeProgramSelector(loadret, uprobeEntry)
+		maps = append(maps, createSelectorMaps(loadret, retState, len(retState.SubStrings()))...)
 		maps = append(maps, getHeapMaps("uprobe_", option.Config.UprobeHeapSize, has.uprobeHeapSize, loadret)...)
 
 		if len(polInfo.stateIDs) != 0 {

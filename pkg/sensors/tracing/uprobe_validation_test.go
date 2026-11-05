@@ -156,6 +156,7 @@ func TestUprobeReturnSensorMaps(t *testing.T) {
 		progs, maps := createUprobeSensorFromEntry(pi, entry, nil, nil, uprobeHas{})
 		require.Len(t, progs, 2)
 		require.False(t, progs[0].SleepableOffload)
+		require.Contains(t, progs[1].PinMap, "string_maps_0")
 		require.NotContains(t, progs[1].PinMap, "regs_map")
 		require.Same(t, progs[0], pi.policyConf.Prog)
 		var confUsers int
